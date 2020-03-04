@@ -20,6 +20,9 @@ class ObjDetector:
         # Work on the frame here by applying different model 
         # Dimension of the matrix 480, 640, 3
         img_shape = (self.img_row, self.img_col, self.channel)
+        if self.model is None:
+            self.model = tf.keras.applications.MobileNetV2(input_shape=img_shape, include_top=False, weights='imagenet')
+        
         print (frame)
 
     # Read the camera data from webcam/file
