@@ -1,19 +1,25 @@
 import cv2
 import numpy as np
+import tensorflow as tf
 import os
 
 class ObjDetector:
-    def __init__(self, file_dir='', file_name='', show_inp_video=True):
+    def __init__(self, file_dir='', file_name='', show_inp_video=True, img_row=480, img_col=640, channel=3):
         # The NN pre-trained model with transfer learning
         self.model = None
         self.show_inp_video = show_inp_video
         self.file_name = file_name
         self.file_dir = os.path.join(os.getcwd(), file_dir)
         self.file_path = os.path.join(self.file_dir, self.file_name)
+        self.img_row = img_row
+        self.img_col = img_col
+        self.channel = channel
     
     # Do inferencing on the frames using the trained NN model
     def process_frame(self, frame):
-        # Work on the frame here by applying different model
+        # Work on the frame here by applying different model 
+        # Dimension of the matrix 480, 640, 3
+        img_shape = (self.img_row, self.img_col, self.channel)
         print (frame)
 
     # Read the camera data from webcam/file
