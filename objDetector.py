@@ -9,6 +9,7 @@ class ObjDetector:
         self.file_name = file_name
         self.file_dir = os.path.join(os.getcwd(), file_dir)
         self.file_path = os.path.join(self.file_dir, self.file_name)
+    
     # Do inferencing on the frames using the trained NN model
     def process_frame(self, frame):
         # Work on the frame here by applying different model
@@ -42,6 +43,6 @@ class ObjDetector:
         cv2.destroyAllWindows()
 
 # Just a simple example
-o = ObjDetector(True)
+o = ObjDetector(show_inp_video=True)
 o.open_video_stream()
 
