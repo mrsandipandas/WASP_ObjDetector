@@ -7,8 +7,9 @@ class ObjDetector:
         self.show_inp_video = show_inp_video
 
     # Do inferencing on the frames using the trained NN model
-    def process_frame(self):
-        pass
+    def process_frame(self, frame):
+        # Work on the frame here by applying different model
+        print (frame)
 
     # Read the camera data from webcam/file
     def read_frames(self):
@@ -20,6 +21,8 @@ class ObjDetector:
 
             # Our operations on the frame come here
             #color = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+
+            self.process_frame(frame)
 
             if self.show_inp_video:
                 # Display the resulting frame
