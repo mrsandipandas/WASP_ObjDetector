@@ -4,7 +4,8 @@ import os
 
 class ObjDetector:
     def __init__(self, file_dir='', file_name='', show_inp_video=True):
-        self.model = []
+        # The NN pre-trained model with transfer learning
+        self.model = None
         self.show_inp_video = show_inp_video
         self.file_name = file_name
         self.file_dir = os.path.join(os.getcwd(), file_dir)
