@@ -24,8 +24,14 @@ cp -r pycocotools <path_to_tensorflow_models>/models/research/
 ```
 protoc object_detection/protos/*.proto --python_out=.
 ```
+6. Add the paths to environment variables
+```
+export PYTHONPATH=$PYTHONPATH:<PATH_TO_TF>/TensorFlow/models/research
+export PYTHONPATH=$PYTHONPATH:<PATH_TO_TF>/TensorFlow/models/research/object_detection
+export PYTHONPATH=$PYTHONPATH:<PATH_TO_TF>/TensorFlow/models/research/slim
+```
 
-6. Running
+7. Running
 ```
 python objDetector.py
 ```
