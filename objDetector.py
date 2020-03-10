@@ -110,7 +110,12 @@ class ObjDetector:
 
             if self.show_inp_video:
                 # Display the resulting frame
-                cv2.imshow('frame',frame)
+                # Uncomment if you want window rescaling
+                # cv2.namedWindow("Real time classification", cv2.WINDOW_NORMAL)
+                font = cv2.FONT_HERSHEY_SIMPLEX
+                cv2.putText(frame, 'Press q to exit', (10,40), font, 0.75, (0, 0, 255), 1, cv2.LINE_AA)
+                frame = cv2.resize(frame, (self.img_col, self.img_row))                
+                cv2.imshow('Real time classification based on coco dataset',frame)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                     break
 
@@ -119,6 +124,6 @@ class ObjDetector:
         cv2.destroyAllWindows()
 
 # Just a simple example
-o = ObjDetector(show_inp_video=True)
+o = ObjDetector(show_inp_video=True, img_row=480, img_col=640)
 o.open_video_stream()
 
