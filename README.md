@@ -27,7 +27,7 @@ protoc object_detection/protos/*.proto --python_out=.
 
 6. Running
 ```
-python python objDetector.py
+python objDetector.py
 ```
 
 
