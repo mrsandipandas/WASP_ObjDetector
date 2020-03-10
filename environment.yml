@@ -67,5 +67,5 @@ dependencies:
     - urllib3==1.25.8
     - werkzeug==1.0.0
     - wrapt==1.12.0
-prefix: /home/sandy/miniconda3/envs/wasp
+prefix: ~/miniconda3/envs/wasp
 
