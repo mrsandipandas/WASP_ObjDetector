@@ -25,5 +25,10 @@ cp -r pycocotools <path_to_tensorflow_models>/models/research/
 protoc object_detection/protos/*.proto --python_out=.
 ```
 
+6. Running
+```
+python python objDetector.py
+```
+
 
 
