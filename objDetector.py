@@ -110,8 +110,10 @@ class ObjDetector:
 
             if self.show_inp_video:
                 # Display the resulting frame
-                # Uncomment if you want window rescaling
-                # cv2.namedWindow("Real time classification", cv2.WINDOW_NORMAL)
+                # For rescaling use: cv2.WINDOW_NORMAL
+                # cv2.namedWindow("Real time classification based on coco dataset", flags=cv2.WND_PROP_FULLSCREEN)
+                # cv2.setWindowProperty('Real time classification based on coco dataset', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 cv2.putText(frame, 'Press q to exit', (10,40), font, 0.75, (0, 0, 255), 1, cv2.LINE_AA)
                 frame = cv2.resize(frame, (self.img_col, self.img_row))                
