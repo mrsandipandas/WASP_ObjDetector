@@ -48,7 +48,7 @@ class ObjDetector:
         if self.model is None:
             # self.model = tf.keras.applications.MobileNetV2(input_shape=img_shape, include_top=False, weights='imagenet')
             self.load_model()
-
+        #image = cv2.resize(frame, dsize=(256, 256), interpolation=cv2.INTER_CUBIC)
         # Converting image to numpy array   
         image = np.asarray(frame)
         # The input needs to be a tensor, convert it using `tf.convert_to_tensor`.
@@ -94,33 +94,34 @@ class ObjDetector:
 
             # Our operations on the frame come here
             #color = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+            if ret:
+                inference_dict = self.process_frame(frame)
 
-            inference_dict = self.process_frame(frame)
+                vis_util.visualize_boxes_and_labels_on_image_array(
+                    frame,
+                    inference_dict['detection_boxes'],
+                    inference_dict['detection_classes'],
+                    inference_dict['detection_scores'],
+                    self.category_index,
+                    instance_masks=inference_dict.get('detection_masks_reframed', None),
+                    use_normalized_coordinates=True,
+                    line_thickness=8
+                )
 
-            vis_util.visualize_boxes_and_labels_on_image_array(
-                frame,
-                inference_dict['detection_boxes'],
-                inference_dict['detection_classes'],
-                inference_dict['detection_scores'],
-                self.category_index,
-                instance_masks=inference_dict.get('detection_masks_reframed', None),
-                use_normalized_coordinates=True,
-                line_thickness=8
-            )
+                if self.show_inp_video:
+                    # Display the resulting frame
+                    # For rescaling use: cv2.WINDOW_NORMAL
+                    # cv2.namedWindow("Real time classification based on coco dataset", flags=cv2.WND_PROP_FULLSCREEN)
+                    # cv2.setWindowProperty('Real time classification based on coco dataset', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
-            if self.show_inp_video:
-                # Display the resulting frame
-                # For rescaling use: cv2.WINDOW_NORMAL
-                # cv2.namedWindow("Real time classification based on coco dataset", flags=cv2.WND_PROP_FULLSCREEN)
-                # cv2.setWindowProperty('Real time classification based on coco dataset', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-
-                font = cv2.FONT_HERSHEY_SIMPLEX
-                cv2.putText(frame, 'Press q to exit', (10,40), font, 0.75, (0, 0, 255), 1, cv2.LINE_AA)
-                frame = cv2.resize(frame, (self.img_col, self.img_row))                
-                cv2.imshow('Real time classification based on coco dataset',frame)
-                if cv2.waitKey(1) & 0xFF == ord('q'):
-                    break
-
+                    font = cv2.FONT_HERSHEY_SIMPLEX
+                    cv2.putText(frame, 'Press q to exit', (10,40), font, 0.75, (0, 0, 255), 1, cv2.LINE_AA)
+                    frame = cv2.resize(frame, (self.img_col, self.img_row))                
+                    cv2.imshow('Real time classification based on coco dataset',frame)
+                    if cv2.waitKey(1) & 0xFF == ord('q'):
+                        break
+            else:
+                break
         # When everything done, release the capture
         cap.release()
         cv2.destroyAllWindows()
@@ -129,7 +130,9 @@ class ObjDetector:
 
 def main():
     # Just a simple example
-    o = ObjDetector(show_inp_video=True, img_row=480, img_col=640)
+    o = ObjDetector(show_inp_video=True, file_dir='/home/sandy/Projects/PhD/Courses/WASP/WASP_ObjDetector', file_name='iss_video.avi', img_row=480, img_col=640)
+    # o = ObjDetector(show_inp_video=True, img_row=480, img_col=640)
+
     o.open_video_stream()
 
 
