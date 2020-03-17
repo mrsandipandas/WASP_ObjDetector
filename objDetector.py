@@ -125,7 +125,14 @@ class ObjDetector:
         cap.release()
         cv2.destroyAllWindows()
 
-# Just a simple example
-o = ObjDetector(show_inp_video=True, img_row=480, img_col=640)
-o.open_video_stream()
+
+
+def main():
+    # Just a simple example
+    o = ObjDetector(show_inp_video=True, img_row=480, img_col=640)
+    o.open_video_stream()
+
+
+if __name__ == '__main__':
+    main()
 
